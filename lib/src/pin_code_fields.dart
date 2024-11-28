@@ -429,7 +429,6 @@ class _PinCodeTextFieldState extends State<PinCodeTextField>
     assert(widget.length > 0);
     assert(_pinTheme.fieldHeight > 0);
     assert(_pinTheme.fieldWidth > 0);
-    assert(_pinTheme.borderWidth >= 0);
     assert(_dialogConfig.affirmativeText != null &&
         _dialogConfig.affirmativeText!.isNotEmpty);
     assert(_dialogConfig.negativeText != null &&
@@ -726,34 +725,7 @@ class _PinCodeTextFieldState extends State<PinCodeTextField>
 return showDialog(
   context: context,
   useRootNavigator: true,
-  builder: (context) => _dialogConfig.platform == PinCodePlatform.iOS
-      ? CupertinoAlertDialog(
-          backgroundColor: widget.dialogBackgroundColor,
-          title: Text(_dialogConfig.dialogTitle!,
-              style: widget.dialogTitleStyle),
-          content: RichText(
-            text: TextSpan(
-              text: _dialogConfig.dialogContent,
-              style: widget.dialogContentStyle ?? TextStyle(
-                color: Theme.of(context).textTheme.labelLarge!.color,
-              ),
-              children: [
-                TextSpan(
-                  text: formattedPastedText,
-                  style: widget.pastedTextStyle ?? defaultPastedTextStyle,
-                ),
-                TextSpan(
-                  text: "?",
-                  style: widget.dialogContentStyle ?? TextStyle(
-                    color: Theme.of(context).textTheme.labelLarge!.color,
-                  ),
-                )
-              ],
-            ),
-          ),
-          actions: _getActionButtons(formattedPastedText),
-        )
-      : AlertDialog(
+  builder: (context) => AlertDialog(
           backgroundColor: widget.dialogBackgroundColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(widget.dialogRadius),
@@ -782,7 +754,7 @@ return showDialog(
           ),
           actions: _getActionButtons(formattedPastedText),
         ),
-);
+    );
   }
 
   @override
