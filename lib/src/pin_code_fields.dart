@@ -988,7 +988,7 @@ return showDialog(
           },
         ),
         TextButton(
-          child: Text(_dialogConfig.negativeText!,
+          child: Text(_dialogConfig.affirmativeText!,
                       style: widget.dialogButtonStyle),
           onPressed: () {
             _textEditingController!.text = pastedText;
