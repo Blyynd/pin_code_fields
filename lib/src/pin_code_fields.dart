@@ -723,65 +723,66 @@ class _PinCodeTextFieldState extends State<PinCodeTextField>
       color: Theme.of(context).colorScheme.onSecondary,
     );
 
-    return showDialog(
-      context: context,
-      useRootNavigator: true,
-      builder: (context) => _dialogConfig.platform == PinCodePlatform.iOS
-          ? CupertinoAlertDialog(
-              backgroundColor: widget.dialogBackgroundColor,
-              title: Text(_dialogConfig.dialogTitle!,
-                  style: widget.dialogTitleStyle),
-              content: RichText(
-                text: TextSpan(
-                  text: _dialogConfig.dialogContent,
+return showDialog(
+  context: context,
+  useRootNavigator: true,
+  builder: (context) => _dialogConfig.platform == PinCodePlatform.iOS
+      ? CupertinoAlertDialog(
+          backgroundColor: widget.dialogBackgroundColor,
+          title: Text(_dialogConfig.dialogTitle!,
+              style: widget.dialogTitleStyle),
+          content: RichText(
+            text: TextSpan(
+              text: _dialogConfig.dialogContent,
+              style: widget.dialogContentStyle ?? TextStyle(
+                color: Theme.of(context).textTheme.labelLarge!.color,
+              ),
+              children: [
+                TextSpan(
+                  text: formattedPastedText,
+                  style: widget.pastedTextStyle ?? defaultPastedTextStyle,
+                ),
+                TextSpan(
+                  text: "?",
                   style: widget.dialogContentStyle ?? TextStyle(
                     color: Theme.of(context).textTheme.labelLarge!.color,
                   ),
-                  children: [
-                    TextSpan(
-                      text: formattedPastedText,
-                      style: widget.pastedTextStyle ?? defaultPastedTextStyle,
-                    ),
-                    TextSpan(
-                      text: "?",
-                      style: widget.dialogContentStyle ??TextStyle(
-                        color: Theme.of(context).textTheme.labelLarge!.color,
-                      ),
-                    )
-                  ],
+                )
+              ],
+            ),
+          ),
+          actions: _getActionButtons(formattedPastedText),
+        )
+      : AlertDialog(
+          backgroundColor: widget.dialogBackgroundColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(widget.dialogRadius),
+          ),
+          title: Text(_dialogConfig.dialogTitle!,
+              style: widget.dialogTitleStyle),
+          content: RichText(
+            text: TextSpan(
+              text: _dialogConfig.dialogContent,
+              style: widget.dialogContentStyle ?? TextStyle(
+                color: Theme.of(context).textTheme.labelLarge!.color,
+              ),
+              children: [
+                TextSpan(
+                  text: formattedPastedText,
+                  style: widget.pastedTextStyle ?? defaultPastedTextStyle,
                 ),
-              ),
-              actions: _getActionButtons(formattedPastedText),
-            )
-          : AlertDialog(
-              backgroundColor: widget.dialogBackgroundColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(widget.dialogRadius),
-              ),
-              title: Text(_dialogConfig.dialogTitle!,
-                  style: widget.dialogTitleStyle),
-              content: RichText(
-                text: TextSpan(
-                  text: _dialogConfig.dialogContent,
+                TextSpan(
+                  text: " ?",
                   style: widget.dialogContentStyle ?? TextStyle(
                     color: Theme.of(context).textTheme.labelLarge!.color,
-                  children: [
-                    TextSpan(
-                      text: formattedPastedText,
-                      style: widget.pastedTextStyle ?? defaultPastedTextStyle,
-                    ),
-                    TextSpan(
-                      text: " ?",
-                      style: widget.dialogContentStyle ?? TextStyle(
-                        color: Theme.of(context).textTheme.labelLarge!.color,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              actions: _getActionButtons(formattedPastedText),
+                  ),
+                )
+              ],
             ),
-    );
+          ),
+          actions: _getActionButtons(formattedPastedText),
+        ),
+);
   }
 
   @override
