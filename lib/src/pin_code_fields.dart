@@ -978,25 +978,7 @@ return showDialog(
 
   List<Widget> _getActionButtons(String pastedText) {
     var resultList = <Widget>[];
-    if (_dialogConfig.platform == PinCodePlatform.iOS) {
-      resultList.addAll([
-        CupertinoDialogAction(
-          child: Text(_dialogConfig.negativeText!,
-                     style: widget.dialogButtonStyle),
-          onPressed: () {
-            Navigator.of(context, rootNavigator: true).pop();
-          },
-        ),
-        CupertinoDialogAction(
-          child: Text(_dialogConfig.affirmativeText!,
-                      style: widget.dialogButtonStyle),
-          onPressed: () {
-            _textEditingController!.text = pastedText;
-            Navigator.of(context, rootNavigator: true).pop();
-          },
-        ),
-      ]);
-    } else {
+ 
       resultList.addAll([
         TextButton(
           child: Text(_dialogConfig.negativeText!),
@@ -1012,7 +994,8 @@ return showDialog(
           },
         ),
       ]);
-    }
+
+    
     return resultList;
   }
 
