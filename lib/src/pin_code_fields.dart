@@ -981,13 +981,15 @@ return showDialog(
  
       resultList.addAll([
         TextButton(
-          child: Text(_dialogConfig.negativeText!),
+          child: Text(_dialogConfig.negativeText!,
+                      style: widget.dialogButtonStyle),
           onPressed: () {
             Navigator.of(context, rootNavigator: true).pop();
           },
         ),
         TextButton(
-          child: Text(_dialogConfig.affirmativeText!),
+          child: Text(_dialogConfig.negativeText!,
+                      style: widget.dialogButtonStyle),
           onPressed: () {
             _textEditingController!.text = pastedText;
             Navigator.of(context, rootNavigator: true).pop();
